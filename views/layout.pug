@@ -1,0 +1,66 @@
+doctype html
+html
+    head
+        title= `${title}`
+        link(rel='stylesheet', href='/css/style.css')
+        link(rel='stylesheet', href='/css/bootstrap.min.css')
+        link(rel='icon', href='data:;base64,iVBORw0KGgo=')
+        link(rel="stylesheet" href="/icons/font-awesome/css/font-awesome.min.css")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+    body
+        block header
+            nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+                a.navbar-brand(href='/stays')
+                     img(src="/icons/airbnb.svg" alt="" width="140" height="40" title="Bootstrap")
+                button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+                    span.navbar-toggler-icon
+                .collapse.navbar-collapse#navbarSupportedContent
+                    ul.navbar-nav
+                        each item in h.menu
+                            li.nav-item
+                                a.nav-link(href=`${item.slug}`)
+                                    span #{item.title}
+                    .form-inline
+                        input.form-control.mr-sm-2(type="text" placeholder="Location" name="search")
+                        .search__results
+                        <!-input.form-control.mr-sm-2(type="text" placeholder="Check in date" name="searchDateIn")
+                        <!-input.form-control.mr-sm-2(type="text" placeholder="Check out date" name="searchDateOut")
+                        <!-input.form-control.mr-sm-2(type="text" placeholder="Number of guests" name="searchGuests")
+                    ul.navbar-nav.ml-auto
+                        if user
+                            li.nav-item
+                                a.nav-link(href='/account')
+                                    i.fa.fa-user-circle(style="padding-right:5px")
+                                    span #{user.name}
+                            li.nav-item
+                                a.nav-link(href='/logout')
+                                    i.fa.fa-sign-out(style="padding-right:5px")
+                                    |Log Out
+                        else
+                            li.nav-item
+                                a.nav-link(href='/register')
+                                    i.fa.fa-user(style="padding-right:5px")
+                                    |Sign Up
+                            li.nav-item
+                                a.nav-link(href='/login')
+                                    i.fa.fa-sign-in(style="padding-right:5px")
+                                    |Login
+
+        block messages
+            .flashes
+            if flashes
+                - const categories = Object.keys(flashes)
+                    each category in categories
+                        each message in flashes[category]
+                            .alert(class=`${category}`)
+                                != message
+                                span.closebtn(onClick="this.parentElement.remove()") &times;
+
+        .content
+            block content
+
+        block scripts
+
+            script(src="/dist/bootstrap.bundle.min.js")
+            script(src="/dist/bootstrap.bundle.min.js.map")
+            script(src="/dist/jquery-3.0.0.slim.min.js")

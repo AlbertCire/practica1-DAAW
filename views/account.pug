@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    .container
+        h2=title
+        form.form(action="/account" method="POST" enctype='application/x-www-form-urlencoded')
+            .form-group
+                label(for="name") Name
+                input(class="formcontrol" type="text" name="name" value=user.name)
+            .form-group
+                label(for="email") Email Address
+                input(class="formcontrol" type="email" name="email" value=user.email)
+            button(type="submit" class="btn btn-primary") Update

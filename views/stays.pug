@@ -1,0 +1,12 @@
+extends layout
+
+include mixins/_stayCard
+include mixins/_pagination
+
+block content
+    .container
+        h2= title
+        .stays
+            each stay in stays
+                +stayCard(stay)
+        +pagination(page, pages, count)

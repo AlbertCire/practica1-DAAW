@@ -1,0 +1,13 @@
+mixin stayCard(stay = {})
+    .stay
+        if user && stay.author.equals(user._id)
+            .card-body
+                a.card-link(href=`/stays/${stay._id}/edit`) Edit
+        img.card-img-top.img-fluid(src=`/uploads/${stay.photo || 'stay.png'}`)
+        .card-body
+            h5.card-title
+                a(href=`/stay/${stay.slug}` style='color: black') #{stay.name}
+            p.card-text= stay.description.split(' ').slice(0, 15).join(' ')
+            h5.card-title
+                a(style='color: black') #{stay.price}
+            p.card-text= stay.location

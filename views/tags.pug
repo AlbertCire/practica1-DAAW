@@ -1,0 +1,16 @@
+extends layout
+
+include mixins/_stayCard
+
+block content
+    .container
+        h2 #{tag || 'Tags'}
+
+        ul.list-group.col-lg-4
+            each t in tags
+                a.list-group-item.d-flex.justify-content-between.align-items-center(href=`/tags/${t._id}` class=(t._id === tag ? 'active' : ''))
+                    span= t._id
+                    span.badge.badge-primary.badge-pill= t.count
+        .stays(style="padding-top:20px")
+            each stay in stays
+                +stayCard(stay)

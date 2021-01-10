@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    .container
+        h2 #{title}
+        form(action='/register' method='POST' enctype='application/x-www-form-urlencoded')
+            .form-group
+                label(for="name") Name
+                input(class="form-control" type="text" name="name" value=body ? body.name : '')
+            .form-group
+                label(for="email") Email
+                input(class="form-control" type="text" name="email" value=body ? body.email : '')
+            .form-group
+                label(for="password") Password
+                input(class="form-control" type="password" name="password")
+            .form-group
+                label(for="password-confirm") Confirm Password
+                input(class="form-control" type="password" name="password-confirm")
+            .form-group
+                label.control-label.requiredField(for='useryType')
+                    | Select User Type
+                select(style="margin-left: 10px" name='userType')
+                    option(value='host') Host
+                    option(value='guest') Guest
+            button(type="submit" class="btn btn-primary") Register
